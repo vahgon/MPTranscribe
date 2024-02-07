@@ -1,5 +1,6 @@
 from pytube import YouTube
 import sys
+import time
 
 url = ''
 
@@ -25,7 +26,7 @@ def download_audio(yt):
         elif response == 'n':
             print('Download aborted')
             download = True
-            sys.wait(3)
+            time.sleep(2)
             sys.exit()
 
         else:
