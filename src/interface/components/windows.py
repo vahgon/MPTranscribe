@@ -6,7 +6,7 @@ class SettingsWindow(tk.Toplevel):
         super().__init__()
 
         self.transient(self.master)
-        self.title('Options')
+        self.title('Settings')
         self.winSize()
 
         self.protocol("WM_DELETE_WINDOW", self.closeWindow)
