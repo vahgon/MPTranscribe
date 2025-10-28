@@ -3,37 +3,35 @@ from tkinter import ttk
 
 
 class App(tk.Tk):
-    def __init__(self):
+    def __init__(self, size):
         super().__init__()
         self.title('MPTranscribe')
-        self.dimensions()
-        self.internal = Internal(self)
+        self.dimensions(size)
+        self.fileDialogue = Menu(self)    
 
-    def dimensions(self):
-        self.maxsize(width=800, height=400)
-        self.minsize(width=800, height=400)
+        self.mainloop()
 
-class Internal(tk.Frame):
+    def dimensions(self, size):
+        self.geometry(f'{size[0]}x{size[1]}')
+        self.minsize(size[0], size[1])
+        self.maxsize(size[0], size[1])
+
+class Menu(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
-        self.content = ttk.Frame(master)
-        self.frame = ttk.Frame(self.content, borderwidth=5, relief="solid", width=800, height=400)
-        self.content.grid(row=0, column=0)
-        self.frame.grid(row=0, column=0, columnspan=3, rowspan=2)
-        self.buttons = Buttons(self)
+        self.place(x=0,y=0,relwidth=0.3,relheight=1)
 
-class Buttons(tk.Frame):
-    def __init__(self, master):
-        super().__init__(master)
-        self.fileDialogueButton()
-        self.tranScrButton()
- 
-    def fileDialogueButton(self):
-        fDiaButton = ttk.Button(self.master.content, text="Choose File")
-        fDiaButton.grid(row=0, column=1)
-    
-    def tranScrButton(self):
-        sButton = ttk.Button(self.master.content, text='Transcribe')
-        sButton.grid(row=0, column=0)
+        self.createWidgets()
 
+    def createWidgets(self):
+        self.dialogueButton = ttk.Button(self, text='Open File')
+        self.transcribeButton = ttk.Button(self, text='Start')
 
+        self.setLayout()
+
+    def setLayout(self):
+        self.columnconfigure((0,1,2,3,4), weight=1, uniform='a')
+        self.rowconfigure((0,1,2,3,4,5,6,7,8), weight=1, uniform='a')
+
+        self.dialogueButton.grid(row=9, column=4, padx=10, pady=10, columnspan=3, rowspan=1, sticky='nswe')
+        self.transcribeButton.grid(row=9, column=0, padx=10,pady=10, columnspan=3, rowspan=1, sticky='nswe')
