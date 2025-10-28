@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog as fd
+from tkinter.messagebox import showinfo
 
 size = []
 
@@ -10,6 +12,7 @@ class App(tk.Tk):
         self.dimensions()
         self.fileFrame = FileDialogueFrame(self)
         self.transFrame = TranscriberFrame(self)
+        self.selectedFile = None
 
         self.mainloop()
 
@@ -31,14 +34,21 @@ class FileDialogueFrame(tk.Frame):
         self.createWidget()
 
     def createWidget(self):
-        self.dialogueButton = ttk.Button(self, text='Open File')
+        self.dialogueButton = ttk.Button(self, text='Open File', command=self.getFileName)
         self.setLayout()
 
     def setLayout(self):
         self.columnconfigure((0,1,2,3,4,5,6), weight=1, uniform='a')
-        self.rowconfigure((0,1,2,3,4,5,6,7,8,9), weight=1, uniform='a')
+        self.rowconfigure((0,1,2,3,4,5,6,7,8), weight=1, uniform='a')
 
-        self.dialogueButton.grid(row=8, column=0, padx=10, pady=10, columnspan=3, rowspan=1, sticky='nswe')
+        self.dialogueButton.grid(row=7, column=0, padx=10, pady=10, columnspan=2, rowspan=1, sticky='nswe')
+    
+    def getFileName(self):
+        fileTypes = [
+            ('All files', '*.*')
+        ]
+        self.selectedFile = fd.askopenfilename(title='Choose an audio file', initialdir='/', filetypes=fileTypes)
+        self.master.selectedFile = self.selectedFile
 
 class TranscriberFrame(tk.Frame):
     def __init__(self, master):
@@ -47,11 +57,12 @@ class TranscriberFrame(tk.Frame):
         self.createWidget()
 
     def createWidget(self):
-        self.transcribeButton = ttk.Button(self, text='Transcribe')
+        self.transcribeButton = ttk.Button(self, text='Transcribe', command=self.printFile)
         self.setLayout()
 
     def setLayout(self):
         self.columnconfigure((0,1,2,3,4,5,6), weight=1, uniform='a')
-        self.rowconfigure((0,1,2,3,4,5,6,7,8,9), weight=1, uniform='a')
+        self.rowconfigure((0,1,2,3,4,5,6,7,8), weight=1, uniform='a')
 
-        self.transcribeButton.grid(row=8, column=0, padx=10, pady=10, columnspan=3, rowspan=1, sticky='nswe')
+        self.transcribeButton.grid(row=7, column=0, padx=10, pady=10, columnspan=2, rowspan=1, sticky='nswe')
+    
