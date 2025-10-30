@@ -10,6 +10,7 @@ class App(tk.Tk):
         self.title('MPTranscribe')
         self.selectedFile = None
         self.optWinOpen = False
+        self.configWinOpen = False
         # TODO - add dark theme
         self.theme = None
 
