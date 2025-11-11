@@ -7,6 +7,7 @@ class MenuBar(tk.Menu):
         super().__init__(master)
         self.fileMenu()
         self.optionsMenu()
+        self.githubMenu()
 
     def fileMenu(self):
         file = tk.Menu(self, tearoff=0)
@@ -16,7 +17,7 @@ class MenuBar(tk.Menu):
         file.add_command(label='Save As')
         file.add_separator()
         file.add_command(label='Exit', command=lambda : self.master.quit())
-    
+
     def designateFile(self):
         fileTypes = [
             ('All files', '*.*')
@@ -41,3 +42,10 @@ class MenuBar(tk.Menu):
         if self.master.configWinOpen is False:
             self.master.configWindow = ConfigurationWindow(self.master)
             self.master.configWinOpen = True
+    
+    def githubMenu(self):
+        self.add_command(label='Github', command=self.openGithub)
+
+    def openGithub(self):
+        from webbrowser import open_new
+        open_new('https://github.com/vahgon/MPTranscribe')
