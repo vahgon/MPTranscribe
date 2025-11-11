@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import PhotoImage
 from src.interface.components.menu import MenuBar
 from src.interface.components.labels import Logo
 
