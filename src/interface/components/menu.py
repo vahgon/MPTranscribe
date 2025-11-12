@@ -1,8 +1,7 @@
-import tkinter as tk
-from tkinter import filedialog as fd
+from tkinter import filedialog, Menu
 from src.interface.components.windows import SettingsWindow, ConfigurationWindow
 
-class MenuBar(tk.Menu):
+class MenuBar(Menu):
     def __init__(self, master):
         super().__init__(master)
         self.fileMenu()
@@ -10,7 +9,7 @@ class MenuBar(tk.Menu):
         self.githubMenu()
 
     def fileMenu(self):
-        file = tk.Menu(self, tearoff=0)
+        file = Menu(self, tearoff=0)
         self.add_cascade(label='File', menu=file)
 
         file.add_command(label='Open File', command=lambda : self.designateFile())
@@ -22,11 +21,11 @@ class MenuBar(tk.Menu):
         fileTypes = [
             ('All files', '*.*')
         ]
-        self.selectedFile = fd.askopenfilename(title='Choose an audio file', initialdir='/', filetypes=fileTypes)
+        self.selectedFile = filedialog.askopenfilename(title='Choose an audio file', initialdir='/', filetypes=fileTypes)
         self.master.selectedFile = self.selectedFile
     
     def optionsMenu(self):
-        opt = tk.Menu(self, tearoff=0)
+        opt = Menu(self, tearoff=0)
         self.add_cascade(label='Options', menu=opt)
         opt.add_command(label='Settings', command=self.checkOptionsWindow)
         opt.add_command(label='Configure', command=self.checkConfigWindow)

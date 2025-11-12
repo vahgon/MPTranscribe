@@ -1,8 +1,8 @@
-import tkinter as tk
 from src.interface.components.menu import MenuBar
 from src.interface.components.labels import Logo
+from tkinter import Tk
 
-class App(tk.Tk):
+class App(Tk):
     def __init__(self):
         super().__init__()
         
@@ -20,7 +20,7 @@ class App(tk.Tk):
         self.mainloop()
 
     def appSize(self):
-        screen = tk.Tk()
+        screen = Tk()
 
         size = []
         size.append(int(screen.winfo_screenwidth()/2.5))
